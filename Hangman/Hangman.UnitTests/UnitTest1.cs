@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Hangman.UnitTests
 {
@@ -9,11 +10,31 @@ namespace Hangman.UnitTests
         [TestMethod]
         public void TestSettingWord()
         {
-            string word = "welcome";
-            Hangman hangman = new Hangman();
-            hangman.Word = word;
-            CollectionAssert.AreEqual(hangman.HiddenWord, word.ToCharArray());
-            Assert.AreEqual(hangman.Word, word);
+            char[] hidden = new char[7] { '_', '_', '_', '_', '_', '_', '_' };
+            Hangman hangman = new Hangman() { Word = "welcome" };
+            CollectionAssert.AreEqual(hangman.HiddenWord, hidden);
+            Assert.AreEqual(hangman.Word, "welcome");
         }
+
+        [TestMethod]
+        public void TestGuessedLetter_l_ReturnsCorrectIndexes()
+        {
+            List<int> indexes = new List<int>() { 2 };
+
+            Hangman hangman = new Hangman() { Word = "welcome" };
+            CollectionAssert.AreEqual(hangman.GetIndexes('l'), indexes);
+        }
+
+        [TestMethod]
+        public void TestGuessedLetter_e_ReturnsCorrectIndexes()
+        {
+            List<int> indexes = new List<int>() { 1,6 };
+
+            Hangman hangman = new Hangman() { Word = "welcome" };
+            CollectionAssert.AreEqual(hangman.GetIndexes('e'), indexes);
+        }
+
+        [TestMethod]
+        public void 
     }
 }
