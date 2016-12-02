@@ -43,5 +43,12 @@ namespace Hangman.UnitTests
             hangman.ReplaceLetters(indexes);
             CollectionAssert.AreEqual(hangman.HiddenWord, hidden);
         }
+        
+        [TestMethod]
+        public void TestGuessCorrectLetter()
+        {
+            Hangman hangman = new Hangman() { Word = "welcome" };
+            Assert.IsTrue(hangman.GuessLetter('e'));
+        }
     }
 }

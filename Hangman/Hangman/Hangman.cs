@@ -10,10 +10,12 @@ namespace Hangman
     {
         private string _word;
         private char[] _hiddenWord;
-        public List<string> GuessedLetters = new List<string>();
+        public List<char> GuessedLetters = new List<char>();
         public int NumberOfIncorrectGuesses;
         private const int INCORRECT = 6;
         private List<int> GuessedLetterIndexs = new List<int>();
+        private int Missed = 0;
+        public string GameStatus = "Playing";
 
         public string Word
         {
@@ -52,6 +54,27 @@ namespace Hangman
             foreach(int index in indexes)
             {
                 _hiddenWord[index] = _word.ToCharArray()[index];
+            }
+        }
+
+        public bool GuessLetter(char letter)
+        {
+            GuessedLetters.Add(letter);
+            List<int> indexes = new List<int>();
+            indexes = GetIndexes(letter);
+            if (indexes.Count == 0)
+            {
+                Missed++;
+                if (Missed == INCORRECT)
+                    GameStatus = "Lost";
+                return false;
+            }
+            else
+            {
+                ReplaceLetters(indexes);
+                if (_word == string.Join("", _hiddenWord))
+                    GameStatus = "Won";
+                return true;
             }
         }
 
