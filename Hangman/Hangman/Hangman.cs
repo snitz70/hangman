@@ -47,5 +47,13 @@ namespace Hangman
             return indexes;
         }
 
+        public void ReplaceLetters(List<int> indexes)
+        {
+            foreach(int index in indexes)
+            {
+                _hiddenWord[index] = _word.ToCharArray()[index];
+            }
+        }
+
     }
 }

@@ -35,6 +35,13 @@ namespace Hangman.UnitTests
         }
 
         [TestMethod]
-        public void 
+        public void TestReplacingUnderscoreWithLetters()
+        {
+            Hangman hangman = new Hangman() { Word = "welcome" };
+            char[] hidden = new char[7] { '_', 'e', '_', '_', '_', '_', 'e' };
+            List<int> indexes = new List<int>() { 1, 6 };
+            hangman.ReplaceLetters(indexes);
+            CollectionAssert.AreEqual(hangman.HiddenWord, hidden);
+        }
     }
 }
