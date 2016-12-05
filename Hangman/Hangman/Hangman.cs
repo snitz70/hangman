@@ -8,9 +8,13 @@ namespace Hangman
 {
     public class Hangman
     {
+
+        // TODO 
+        // add method to pick random word from text file
+        // 
         private string _word;
         private char[] _hiddenWord;
-        public List<char> GuessedLetters = new List<char>();
+        public List<char> _guessedLetters = new List<char>();
         public int NumberOfIncorrectGuesses;
         private const int INCORRECT = 6;
         private List<int> GuessedLetterIndexs = new List<int>();
@@ -31,9 +35,17 @@ namespace Hangman
             get { return _word; }
         }
 
-        public char[] HiddenWord
+        public string HiddenWord
         {
-            get { return _hiddenWord; }
+            get { return String.Join(" ", _hiddenWord); }
+        }
+
+        public string GuessedLetters
+        {
+            get
+            {
+                return String.Join(" ", _guessedLetters);
+            }
         }
 
         public List<int> GetIndexes(char letter)
@@ -57,9 +69,10 @@ namespace Hangman
             }
         }
 
+        // Guess letter and return boolean whether it was found
         public bool GuessLetter(char letter)
         {
-            GuessedLetters.Add(letter);
+            _guessedLetters.Add(letter);
             List<int> indexes = new List<int>();
             indexes = GetIndexes(letter);
             if (indexes.Count == 0)

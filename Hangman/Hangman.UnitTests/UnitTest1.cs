@@ -10,9 +10,9 @@ namespace Hangman.UnitTests
         [TestMethod]
         public void TestSettingWord()
         {
-            char[] hidden = new char[7] { '_', '_', '_', '_', '_', '_', '_' };
+            string hidden = "_ _ _ _ _ _ _";
             Hangman hangman = new Hangman() { Word = "welcome" };
-            CollectionAssert.AreEqual(hangman.HiddenWord, hidden);
+            Assert.AreEqual(hangman.HiddenWord, hidden);
             Assert.AreEqual(hangman.Word, "welcome");
         }
 
@@ -38,10 +38,10 @@ namespace Hangman.UnitTests
         public void TestReplacingUnderscoreWithLetters()
         {
             Hangman hangman = new Hangman() { Word = "welcome" };
-            char[] hidden = new char[7] { '_', 'e', '_', '_', '_', '_', 'e' };
+            string hidden = "_ e _ _ _ _ e";
             List<int> indexes = new List<int>() { 1, 6 };
             hangman.ReplaceLetters(indexes);
-            CollectionAssert.AreEqual(hangman.HiddenWord, hidden);
+            Assert.AreEqual(hangman.HiddenWord, hidden);
         }
         
         [TestMethod]
