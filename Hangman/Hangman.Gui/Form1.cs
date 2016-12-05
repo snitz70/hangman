@@ -12,12 +12,12 @@ namespace Hangman.Gui
 {
     public partial class Form1 : Form
     {
-        Hangman hangman;
+        Game hangman;
 
         public Form1()
         {
             InitializeComponent();
-            hangman = new Hangman();
+            hangman = new Game();
             UpdateGui();
 
         }

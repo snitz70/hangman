@@ -11,9 +11,9 @@ namespace Hangman.UnitTests
         public void TestSettingWord()
         {
             string hidden = "_ _ _ _ _ _ _";
-            Hangman hangman = new Hangman() { Word = "welcome" };
-            Assert.AreEqual(hangman.HiddenWord, hidden);
-            Assert.AreEqual(hangman.Word, "welcome");
+            Game game = new Game() { Word = "welcome" };
+            Assert.AreEqual(game.HiddenWord, hidden);
+            Assert.AreEqual(game.Word, "welcome");
         }
 
         [TestMethod]
@@ -21,8 +21,8 @@ namespace Hangman.UnitTests
         {
             List<int> indexes = new List<int>() { 2 };
 
-            Hangman hangman = new Hangman() { Word = "welcome" };
-            CollectionAssert.AreEqual(hangman.GetIndexes('l'), indexes);
+            Game game = new Game() { Word = "welcome" };
+            CollectionAssert.AreEqual(game.GetIndexes('l'), indexes);
         }
 
         [TestMethod]
@@ -30,25 +30,25 @@ namespace Hangman.UnitTests
         {
             List<int> indexes = new List<int>() { 1,6 };
 
-            Hangman hangman = new Hangman() { Word = "welcome" };
-            CollectionAssert.AreEqual(hangman.GetIndexes('e'), indexes);
+            Game game = new Game() { Word = "welcome" };
+            CollectionAssert.AreEqual(game.GetIndexes('e'), indexes);
         }
 
         [TestMethod]
         public void TestReplacingUnderscoreWithLetters()
         {
-            Hangman hangman = new Hangman() { Word = "welcome" };
+            Game game = new Game() { Word = "welcome" };
             string hidden = "_ e _ _ _ _ e";
             List<int> indexes = new List<int>() { 1, 6 };
-            hangman.ReplaceLetters(indexes);
-            Assert.AreEqual(hangman.HiddenWord, hidden);
+            game.ReplaceLetters(indexes);
+            Assert.AreEqual(game.HiddenWord, hidden);
         }
         
         [TestMethod]
         public void TestGuessCorrectLetter()
         {
-            Hangman hangman = new Hangman() { Word = "welcome" };
-            Assert.IsTrue(hangman.GuessLetter('e'));
+            Game game = new Game() { Word = "welcome" };
+            Assert.IsTrue(game.GuessLetter('e'));
         }
     }
 }

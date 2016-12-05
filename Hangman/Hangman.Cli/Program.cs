@@ -10,7 +10,7 @@ namespace Hangman.Cli
     {
         static void Main(string[] args)
         {
-            Hangman hangman = new Hangman() { Word = "welcome" };
+            Game hangman = new Game() { Word = "welcome" };
             Console.WriteLine(hangman.HiddenWord);
             while (hangman.GameStatus == "Playing")
             {
