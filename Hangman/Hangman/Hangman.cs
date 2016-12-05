@@ -61,6 +61,11 @@ namespace Hangman
             return indexes;
         }
 
+        public Hangman()
+        {
+            Word = GetRandomWord();
+        }
+
         public void ReplaceLetters(List<int> indexes)
         {
             foreach(int index in indexes)
@@ -89,6 +94,13 @@ namespace Hangman
                     GameStatus = "Won";
                 return true;
             }
+        }
+
+        private string GetRandomWord()
+        {
+            string[] lines = System.IO.File.ReadAllLines("C:\\temp\\words.txt");
+            Random random = new Random();
+            return lines[random.Next(lines.Length)];
         }
 
     }

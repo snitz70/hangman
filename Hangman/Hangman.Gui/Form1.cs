@@ -17,7 +17,7 @@ namespace Hangman.Gui
         public Form1()
         {
             InitializeComponent();
-            hangman = new Hangman() { Word = "bookkeepper" };
+            hangman = new Hangman();
             UpdateGui();
 
         }
