@@ -18,8 +18,8 @@ namespace Hangman.Gui
         {
             InitializeComponent();
             hangman = new Game();
+            hangman.NewGame();
             UpdateGui();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -29,7 +29,7 @@ namespace Hangman.Gui
 
         private void UpdateGui()
         {
-            label1.Text = hangman.HiddenWord;
+            label1.Text = hangman.word.HiddenWord;
             label2.Text = ("Guessed: " + hangman.GuessedLetters);
             if (hangman.GameStatus != "Playing")
             {
@@ -41,7 +41,7 @@ namespace Hangman.Gui
         {
             if (e.KeyCode == Keys.Enter)
             {
-                hangman.GuessLetter(Convert.ToChar(textBox1.Text));
+                hangman.GuessLetter(textBox1.Text);
                 UpdateGui();
                 textBox1.Clear();
             }

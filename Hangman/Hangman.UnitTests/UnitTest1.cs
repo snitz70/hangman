@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
+
 namespace Hangman.UnitTests
 {
     [TestClass]
@@ -11,44 +12,43 @@ namespace Hangman.UnitTests
         public void TestSettingWord()
         {
             string hidden = "_ _ _ _ _ _ _";
-            Game game = new Game() { Word = "welcome" };
-            Assert.AreEqual(game.HiddenWord, hidden);
-            Assert.AreEqual(game.Word, "welcome");
-        }
-
-        [TestMethod]
-        public void TestGuessedLetter_l_ReturnsCorrectIndexes()
-        {
-            List<int> indexes = new List<int>() { 2 };
-
-            Game game = new Game() { Word = "welcome" };
-            CollectionAssert.AreEqual(game.GetIndexes('l'), indexes);
-        }
-
-        [TestMethod]
-        public void TestGuessedLetter_e_ReturnsCorrectIndexes()
-        {
-            List<int> indexes = new List<int>() { 1,6 };
-
-            Game game = new Game() { Word = "welcome" };
-            CollectionAssert.AreEqual(game.GetIndexes('e'), indexes);
+            Word word = new Word("welcome");
+            Assert.AreEqual(word.HiddenWord, hidden);
+            Assert.AreEqual(word.OriginalWord, "welcome");
         }
 
         [TestMethod]
         public void TestReplacingUnderscoreWithLetters()
         {
-            Game game = new Game() { Word = "welcome" };
+            Word word = new Word("welcome");
             string hidden = "_ e _ _ _ _ e";
-            List<int> indexes = new List<int>() { 1, 6 };
-            game.ReplaceLetters(indexes);
-            Assert.AreEqual(game.HiddenWord, hidden);
+            word.ReplaceLetterIfInWord("e");
+            Assert.AreEqual(word.HiddenWord, hidden);
         }
-        
+
         [TestMethod]
-        public void TestGuessCorrectLetter()
+        public void TestGuessedLetter_l_ReturnsTrue()
         {
-            Game game = new Game() { Word = "welcome" };
-            Assert.IsTrue(game.GuessLetter('e'));
+            Game game = new Game();
+            game.word = new Word("welcome");
+            Assert.IsTrue(game.GuessLetter("e"));
         }
+
+        [TestMethod]
+        public void TestGuessedLetter_e_ReturnsTrue()
+        {
+            Game game = new Game();
+            game.word = new Word("welcome");
+            Assert.IsTrue(game.GuessLetter("e"));
+        }
+
+        [TestMethod]
+        public void TestGussedLetter_g_ReturnsFalse()
+        {
+            Game game = new Game();
+            game.word = new Word("welcome");
+            Assert.IsFalse(game.GuessLetter("g"));
+        }
+
     }
 }
