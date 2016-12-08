@@ -31,10 +31,8 @@ namespace Hangman.Gui
         {
             label1.Text = hangman.word.HiddenWord;
             label2.Text = ("Guessed: " + hangman.GuessedLetters);
-            if (hangman.GameStatus != "Playing")
-            {
-                MessageBox.Show("You " + hangman.GameStatus, "Game Over");
-            }
+            if (hangman.gamestate != Game.GameState.Playing)
+                MessageBox.Show("You " + hangman.gamestate.ToString(), "Game Over");
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)

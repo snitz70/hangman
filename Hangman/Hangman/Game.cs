@@ -12,8 +12,16 @@ namespace Hangman
         public int NumberOfIncorrectGuesses;
         private const int GUESSESTOLOSEGAME = 6;
         private int Missed = 0;
-        public string GameStatus = "Playing";
+
+        public enum GameState
+        {
+            Playing,
+            Won,
+            Lost
+        };
+
         public Word word;
+        public GameState gamestate;
 
         public string GuessedLetters
         {
@@ -26,6 +34,7 @@ namespace Hangman
         public void NewGame()
         {
             word = new Word(GetRandomWord());
+            gamestate = GameState.Playing;
         }
 
         public string GetRandomWord()
@@ -40,12 +49,20 @@ namespace Hangman
             _guessedLetters.Add(Convert.ToChar(letter));
             bool LetterInWord = word.ReplaceLetterIfInWord(letter);
             if (!LetterInWord)
-            {
                 Missed++;
-            }
+
+            UpdateGameState();
             return LetterInWord;
         }
+        
+        private void UpdateGameState()
+        {
+            if (Missed == GUESSESTOLOSEGAME)
+                gamestate = GameState.Lost;
 
+            if (word.HiddenWord.IndexOf('_') == -1)
+                gamestate = GameState.Won;
+        }
 
     }
 }
