@@ -39,8 +39,14 @@ namespace Hangman.Gui
         {
             if (e.KeyCode == Keys.Enter)
             {
-                hangman.GuessLetter(textBox1.Text);
-                UpdateGui();
+                if (hangman.GuessedLetters.IndexOf(textBox1.Text) > -1)
+                    MessageBox.Show("You already guessed that letter");
+
+                else
+                {
+                    hangman.GuessLetter(textBox1.Text);
+                    UpdateGui();
+                }
                 textBox1.Clear();
             }
         }
